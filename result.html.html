@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebration</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Georgia', serif;
+  text-align: center;
+  background-color: #ffe4e1;
+  overflow: hidden;
+  animation: disco 3s infinite alternate;
+}
+h1 {
+  font-size: 3em;
+  color: #fff0f5;
+  text-shadow: 2px 2px rgba(0,0,0,0.2);
+}
+@keyframes disco {
+  0% { background-color: #ffe4e1; }
+  25% { background-color: #ffd1dc; }
+  50% { background-color: #ffc0cb; }
+  75% { background-color: #ffb6c1; }
+  100% { background-color: #ffe4e1; }
+}
+/* Balloons */
+.balloon {
+  position: absolute;
+  width: 30px;
+  height: 40px;
+  background-color: #ffb6c1;
+  border-radius: 50% 50% 50% 50%;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { bottom: -50px; transform: translateX(0); }
+  100% { bottom: 100%; transform: translateX(50px); }
+}
+</style>
+</head>
+<body>
+<h1 id="message">...</h1>
+
+<script>
+// Get choice from URL
+const urlParams = new URLSearchParams(window.location.search);
+const choice = urlParams.get('choice');
+const message = document.getElementById('message');
+
+if (choice === 'mine') {
+    message.textContent = "Yeah I know you're mine 💖";
+} else if (choice === 'day') {
+    message.textContent = "Yeah, you made my day 💖";
+}
+
+// Add balloons dynamically
+for (let i = 0; i < 20; i++) {
+    const balloon = document.createElement('div');
+    balloon.classList.add('balloon');
+    balloon.style.left = Math.random() * 100 + '%';
+    balloon.style.animationDuration = (3 + Math.random()*5) + 's';
+    balloon.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 80%)`;
+    document.body.appendChild(balloon);
+}
+</script>
+</body>
+</html>
